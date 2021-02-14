@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -13,7 +14,6 @@ import (
 	"github.com/nathan-tw/blog/pkg/setting"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
-
 
 func init() {
 	err := setupSetting()
@@ -37,15 +37,14 @@ func main() {
 	gin.SetMode(global.ServerSetting.RunMode)
 	router := routers.NewRouter()
 	s := &http.Server{
-		Addr: ":" + global.ServerSetting.HttpPort,
-		Handler: router,
-		ReadTimeout: global.ServerSetting.ReadTimeout,
-		WriteTimeout: global.ServerSetting.WriteTimeout,
+		Addr:           ":" + global.ServerSetting.HttpPort,
+		Handler:        router,
+		ReadTimeout:    global.ServerSetting.ReadTimeout,
+		WriteTimeout:   global.ServerSetting.WriteTimeout,
 		MaxHeaderBytes: 1 << 20,
 	}
 	s.ListenAndServe()
 }
-
 
 func setupSetting() error {
 	setting, err := setting.NewSetting()
@@ -60,7 +59,7 @@ func setupSetting() error {
 	if err != nil {
 		return err
 	}
-	err = setting.ReadSection("Datebbase", &global.DatabaseSetting)
+	err = setting.ReadSection("Database", &global.DatabaseSetting)
 	if err != nil {
 		return err
 	}
@@ -70,9 +69,8 @@ func setupSetting() error {
 	return nil
 }
 
-
 func setupDBEngine() error {
-	var err error 
+	var err error
 	global.DBEngine, err = model.NewDBEngine(global.DatabaseSetting)
 	if err != nil {
 		return err
@@ -81,14 +79,13 @@ func setupDBEngine() error {
 	return nil
 }
 
-
 // set up logger using lumberjack as io.Writter, while max size was said to be 600mb and 10-days lives
 func setupLogger() error {
 	fileName := global.AppSetting.LogSavePath + "/" + global.AppSetting.LogFileName + global.AppSetting.LogFileExt
 	global.Logger = logger.NewLogger(&lumberjack.Logger{
-		Filename: fileName,
-		MaxSize: 600,
-		MaxAge: 10,
+		Filename:  fileName,
+		MaxSize:   600,
+		MaxAge:    10,
 		LocalTime: true,
 	}, "", log.LstdFlags).WithCaller(2)
 
