@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"fmt"
 	"net/http"
 	"time"
 
@@ -33,7 +32,7 @@ func init() {
 }
 
 func main() {
-	global.Logger.Infof("%s: go-programming-tour-book/%s", "nathanlin", "blog")
+	global.Logger.Info("blog proj start")
 	gin.SetMode(global.ServerSetting.RunMode)
 	router := routers.NewRouter()
 	s := &http.Server{

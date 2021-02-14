@@ -1,1 +1,3 @@
 2021/02/14 12:06:01 {"callers":["/home/nathan/workspace/golang_projs/blog/main.go: 31 main.init.0"],"level":"fatal","message":"nathanlin: go-programming-tour-book/blog","time":1613322361141763559}
+2021/02/14 12:10:26 {"callers":["/home/nathan/workspace/golang_projs/blog/main.go: 28 main.init.0"],"level":"info","message":"nathanlin: go-programming-tour-book/blog","time":1613322626584851772}
+2021/02/14 12:12:49 {"callers":["/home/nathan/workspace/golang_projs/blog/main.go: 28 main.init.0"],"level":"info","message":"blog proj start","time":1613322769675389661}
